@@ -29,7 +29,7 @@ function App() {
 
 
     if (temperatura1 && temperatura2) {     
-      console.log("teste")
+    
       getEnviar(temperatura1, tipo1)
     }
   }
@@ -41,7 +41,7 @@ function App() {
 
     
     if (temperatura1 && temperatura2) {     
-      console.log("teste")
+
       getEnviar(temperatura1, tipo1)
     }
   }
@@ -50,7 +50,7 @@ function App() {
     setTemperatura1(event.target.value)
 
     if(tipo1 && tipo2){
-      console.log("teste2")
+
       
       if(event.target.value === ''){
         
@@ -61,7 +61,7 @@ function App() {
         await getEnviar(event.target.value, tipo)
         console.log(temperatura)
         setTemperatura2(temperatura)
-        console.log(temperatura2)
+     
 
       }
 
@@ -82,7 +82,7 @@ function App() {
         await getEnviar(event.target.value, tipo)
         console.log(temperatura)
         setTemperatura1(temperatura)
-        console.log(temperatura2)
+  
       
   
       }
