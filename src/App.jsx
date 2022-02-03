@@ -20,6 +20,8 @@ function App() {
   const [tipo1, setTipo1] = useState('')
   const [tipo2, setTipo2] = useState('')
 
+  let temperatura = null
+
   const handleChangeTipo1 =  (event) =>  {
     const teste = event.target.value === 'c' ? 'f' : 'c'
     setTipo2(teste)
@@ -49,30 +51,42 @@ function App() {
 
     if(tipo1 && tipo2){
       console.log("teste2")
-      debugger
+      
       if(event.target.value === ''){
-        debugger
+        
         setTemperatura2("")
       }else{
 
         const tipo = tipo1 ? tipo1 : tipo2
-        const temp = await getEnviar(event.target.value, tipo)
-        console.log(temp)
-        setTemperatura2(temp)
+        await getEnviar(event.target.value, tipo)
+        console.log(temperatura)
+        setTemperatura2(temperatura)
         console.log(temperatura2)
+
       }
 
     }
   }
 
-  const handleChangeTemp2 = (event) => {
+  const handleChangeTemp2 = async (event) => {
     setTemperatura2(event.target.value)
-    if(tipo1 && tipo2){ 
+    if(tipo1 && tipo2){
       console.log("teste2")
+      
       if(event.target.value === ''){
-        debugger
+        
         setTemperatura1("")
+      }else{
+
+        const tipo = tipo1 ? tipo1 : tipo2
+        await getEnviar(event.target.value, tipo)
+        console.log(temperatura)
+        setTemperatura1(temperatura)
+        console.log(temperatura2)
+      
+  
       }
+
     }
   }
   const getEnviar = async (temp, tipo) => {
@@ -84,8 +98,7 @@ function App() {
         })
         .then(response => response.json())
         .then(json => {
-              debugger
-            return json.temperatura
+          temperatura =  json.temperatura
         })
         .catch(err => console.log(err))
 }
@@ -127,6 +140,7 @@ function App() {
             id="outlined-select-currency"
             value={temperatura2}
             onChange={handleChangeTemp2}
+            disabled
           ></TextField>
           <TextField
             id="outlined-select-currency"
@@ -135,6 +149,8 @@ function App() {
             onChange={handleChangeTipo2}
             size="small"
             defaultValue={tipos[1].tipo}
+            disabled
+            
           >
             {tipos.map((option) => (
               <MenuItem key={option.tipo} value={option.tipo}>
